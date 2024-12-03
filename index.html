@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מערכת הדרכה מותאמת תרבות - תצוגה מלאה</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f0f0f0;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            border: none;
+            background: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: #4a90e2;
+            color: white;
+        }
+
+        .tab-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .flow-diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .phase-timeline {
+            margin: 20px 0;
+        }
+
+        .phase-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .phase-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-left: 15px;
+            min-width: 40px;
+        }
+
+        .phase-content {
+            flex-grow: 1;
+        }
+
+        .duration-tag {
+            background: #e0f0ff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .importance-indicator {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .importance-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4a90e2;
+        }
+
+        .empty-dot {
+            background: #e0e0e0;
+        }
+
+        .details-section {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .cultural-note {
+            background: #fff2cc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .timeline-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .timeline-step {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+        }
+
+        .timeline-step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #4a90e2;
+            top: 50%;
+            right: 50%;
+            z-index: 1;
+        }
+
+        .timeline-step:last-child::after {
+            display: none;
+        }
+
+        .step-content {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>מערכת הדרכה מותאמת תרבות</h1>
+            <p>מדריך מקיף להטמעת נהלי אבטחה בהתאמה לתרבות המקומית</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('flow')">תרשים זרימה</button>
+            <button class="tab-button" onclick="openTab('phases')">שלבי ביצוע</button>
+            <button class="tab-button" onclick="openTab('details')">פירוט והנחיות</button>
+        </div>
+
+        <div id="flow" class="tab-content active">
+            <div class="flow-diagram">
+                <div class="mermaid">
+                    flowchart TD
+                    classDef phase1 fill:#e6f3ff,stroke:#333,stroke-width:2px
+                    classDef phase2 fill:#fff2cc,stroke:#333,stroke-width:2px
+                    classDef phase3 fill:#d5e8d4,stroke:#333,stroke-width:2px
+                    classDef phase4 fill:#ffe6cc,stroke:#333,stroke-width:2px
+                    classDef decision fill:#f8cecc,stroke:#333,stroke-width:2px
+
+                    subgraph שלב_הכנה
+                    A[הכנה מוקדמת]:::phase1 --> B[פגישה עם מנהיגי הקהילה]:::phase1
+                    B --> C[התאמת תכנים]:::phase1
+                    end
+
+                    subgraph פתיחה_וחיבור
+                    C --> D[טקס פתיחה]:::phase2
+                    D --> E[מעגל היכרות]:::phase2
+                    end
+
+                    subgraph למידה_והטמעה
+                    E --> F[הדרכה מעשית]:::phase3
+                    F --> G[תרגול קבוצתי]:::phase3
+                    G --> H[משוב ושיפור]:::phase3
+                    end
+
+                    subgraph יישום_בשטח
+                    H --> I[יישום מעשי]:::phase4
+                    I --> J[חניכה אישית]:::phase4
+                    J --> K[מעקב והערכה]:::phase4
+                    end
+
+                    K --> L{הערכת ביצועים}:::decision
+                    L -->|נדרש שיפור| F
+                    L -->|מוצלח| M[הסמכת חונכים]:::phase4
+                </div>
+            </div>
+        </div>
+
+        <div id="phases" class="tab-content">
+            <div class="phase-timeline">
+                <div class="phase-item">
+                    <div class="phase-number">1</div>
+                    <div class="phase-content">
+                        <h3>שלב ההכנה<span class="duration-tag">שבוע-שבועיים</span></h3>
+                        <p>פגישות מקדימות עם מנהיגי הקהילה, למידת המנהגים המקומיים, והתאמת התכנים.</p>
+                        <div class="importance-indicator">
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot"></span>
+                        </div>
+                        <div class="cultural-note">
+                            חשוב: יש לכבד את המבנה ההיררכי המסורתי ולקבל את ברכת הדרך ממנהיגי הקהילה
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-item">
+                    <div class="phase-number">2</div>
+                    <div class="phase-content">
+                        <h3>פתיחה וחיבור<span class="duration-tag">יום-יומיים</span></h3>
+                        <p>טקס פתיחה מסורתי, היכרות עם המשתתפים, בניית אמון והצגת מטרות.</p>
+                        <div class="importance-indicator">
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot"></span>
+                            <span class="importance-dot empty-dot"></span>
+                        </div>
+                        <div class="cultural-note">
+                            מומלץ: שילוב אלמנטים מסורתיים כמו שירה, ריקוד או טקסים מקומיים
+                        </div>
+                    </div>
+                </div>
+
+                <!-- שאר השלבים באותו מבנה... -->
+            </div>
+        </div>
+
+        <div id="details" class="tab-content">
+            <div class="details-section">
+                <h2>הנחיות מפורטות ליישום</h2>
+                
+                <div class="timeline-container">
+                    <div class="timeline-step">
+                        <div class="step-content">
+                            <h4>הכנה</h4>
+                            <p>פגישות מקדימות</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-content">
+                            <h4>פתיחה</h4>
+                            <p>טקס והיכרות</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-content">
+                            <h4>הדרכה</h4>
+                            <p>למידה והתנסות</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-content">
+                            <h4>יישום</h4>
+                            <p>תרגול בשטח</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-content">
+                            <h4>הטמעה</h4>
+                            <p>מעקב והסמכה</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- כאן יתווסף תוכן מפורט נוסף... -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'cardinal',
+            }
+        });
+
+        function openTab(tabName) {
+            const tabs = document.getElementsByClassName("tab-content");
+            const buttons = document.getElementsByClassName("tab-button");
+
+            for (let tab of tabs) {
+                tab.classList.remove("active");
+            }
+            for (let button of buttons) {
+                button.classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            document.querySelector(`button[onclick="openTab('${tabName}')"]`).classList.add("active");
+        }
+    </script>
+</body>
+</html>
